@@ -1,0 +1,29 @@
+>mode,zm
+>type,common
+
+#include "zm_mod.class"
+
+sound,zm_mod
+scriptparsetree,scripts/zm/gametypes/_clientids.gsc
+scriptparsetree,scripts/zm/login.gsc
+scriptparsetree,scripts/zm/login.csc
+
+
+// You can modify these files that are shown below for adding/removing weapons from the Mystery Box
+/*
+stringtable,gamedata/weapons/zm/zm_levelcommon_weapons.csv // Custom Maps
+stringtable,gamedata/weapons/zm/zm_asylum_weapons.csv // Verruckt
+stringtable,gamedata/weapons/zm/zm_castle_weapons.csv // Der Eisendrache
+stringtable,gamedata/weapons/zm/zm_cosmodrome_weapons.csv // Ascension
+stringtable,gamedata/weapons/zm/zm_factory_weapons.csv // The Giant
+stringtable,gamedata/weapons/zm/zm_genesis_weapons.csv // Revelations 
+stringtable,gamedata/weapons/zm/zm_island_weapons.csv // Zetsubo No Shima
+stringtable,gamedata/weapons/zm/zm_moon_weapons.csv // Moon
+stringtable,gamedata/weapons/zm/zm_prototype_weapons.csv // Nacht Der Untoten
+stringtable,gamedata/weapons/zm/zm_stalingrad_weapons.csv // Gorod Krovi
+stringtable,gamedata/weapons/zm/zm_sumpf_weapons.csv // Shi No Numa
+stringtable,gamedata/weapons/zm/zm_temple_weapons.csv // Shangri La
+stringtable,gamedata/weapons/zm/zm_theater_weapons.csv // Kino Der Toten
+stringtable,gamedata/weapons/zm/zm_tomb_weapons.csv // Origins
+stringtable,gamedata/weapons/zm/zm_zod_weapons.csv // Shadows Of Evil
+*/
