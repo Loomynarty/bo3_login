@@ -32,6 +32,11 @@
 
 function init()
 {
+    // Trigger function on player spawn
+    callback::on_spawned( &watch_max_ammo );
+    callback::on_spawned( &debug );
+    callback::on_spawned( &map_check );
+
     // Initiates the custom loadout
     level.giveCustomLoadout = &giveCustomLoadout; 
 
@@ -40,20 +45,16 @@ function init()
 
     // Change starting perks
     level.perk_purchase_limit = 10;
-
-    // Thread the Debug and MapCheck functions
-    thread Debug();
-    thread MapCheck();
 }
 
-function Debug()
+function debug()
 {
     // Wait until the blackscreen has passed
     level flag::wait_till( "initial_blackscreen_passed" );
     IPrintLnBold("^1DEBUG: GSC Loading Successful");
 }
 
-function MapCheck()
+function map_check()
 {
     //Gets the map name
     mapname = GetDvarString("ui_mapname"); 
@@ -77,4 +78,19 @@ function giveCustomLoadout(takeAllWeapons)
 
     // Switches to the weapon the server gave the player
     self SwitchToWeapon(weapon); 
+}
+
+function watch_max_ammo() {
+    self endon("bled_out");
+    self endon("spawned_player");
+    self endon("disconnect");
+    for(;;) {
+        self waittill("zmb_max_ammo");
+        IPrintLnBold("^1DEBUG: BO4 Max Ammo Trigger");
+        foreach(weapon in self GetWeaponsList(1)) {
+            if (isdefined(weapon.clipsize) && weapon.clipsize > 0) { 
+                self SetWeaponAmmoClip(weapon, weapon.clipsize);
+            }
+        }
+    }
 }
