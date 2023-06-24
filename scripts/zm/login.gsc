@@ -32,15 +32,23 @@
 
 function init()
 {
-    level.giveCustomLoadout = &giveCustomLoadout; // Initiates the custom loadout (Spawn weapons, as certain maps use a certian function that you can't replace without a loadout)
+    // Initiates the custom loadout
+    level.giveCustomLoadout = &giveCustomLoadout; 
+
+    // Change starting points
     level.player_starting_points = 500000;
+
+    // Change starting perks
     level.perk_purchase_limit = 10;
+
+    // Thread the Debug and MapCheck functions
     thread Debug();
     thread MapCheck();
 }
 
 function Debug()
 {
+    // Wait until the blackscreen has passed
     level flag::wait_till( "initial_blackscreen_passed" );
     IPrintLnBold("^1DEBUG: GSC Loading Successful");
 }
@@ -49,14 +57,24 @@ function MapCheck()
 {
     //Gets the map name
     mapname = GetDvarString("ui_mapname"); 
+
+    // Wait until the blackscreen has passed
     level flag::wait_till( "initial_blackscreen_passed" );
     IPrintLnBold("^1DEBUG: mapname = " + mapname);
 }
 
 function giveCustomLoadout(takeAllWeapons)
 {
-    level.weapon_start = "sniper_fastsemi"; // Starting weapon
+    // Starting weapon
+    level.weapon_start = "sniper_fastsemi"; 
+
+    // Built in function in scripts\zm\_zm_utility.gsh
+    // Gives the player a weapon that respects the weapon kits
     weapon = self zm_weapons::give_build_kit_weapon(GetWeapon(level.weapon_start));
-    self GiveWeapon(level.weaponBaseMelee); // This gives the player the ability to melee
-    self SwitchToWeapon(weapon); // Switches to the weapon the server gave the player
+
+    // This gives the player the ability to melee   
+    self GiveWeapon(level.weaponBaseMelee); 
+
+    // Switches to the weapon the server gave the player
+    self SwitchToWeapon(weapon); 
 }
