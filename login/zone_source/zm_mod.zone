@@ -5,6 +5,7 @@
 
 sound,zm_mod
 scriptparsetree,scripts/zm/gametypes/_clientids.gsc
+scriptparsetree,scripts/zm/_zm_weapons.gsc
 scriptparsetree,scripts/zm/login.gsc
 scriptparsetree,scripts/zm/login.csc
 

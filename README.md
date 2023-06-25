@@ -4,6 +4,7 @@ Current features:
 - Sets starting points to 500000
 - Sets perk limit to 10
 - Sets starting weapon to Drakon
+- Random camos 
 
 The primary file to pay attention to is `scripts\zm\login.gsc`
 
@@ -20,6 +21,7 @@ How to build:
     - +logfile 2: Logs what the game is doing into the `console_mp.log` file in the mod folder
     - +devmap **replace_with_map**: Loads straight into the specified map. [List of map names](https://t7wiki.com/en/information/list-of-original-map-console-names)
     - Example: +devmap zm_prototype +developer 2 +logfile 2 
+    - Example 2: +devmap zm_testopener +developer 2 +logfile 2
 7. Profit!
 
 Mod Template Download: [Link](https://drive.google.com/file/d/15Z4Ho8yZFBvgh6xqv8HutQnJCcey-W7g/view?usp=sharing)
