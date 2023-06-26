@@ -3,6 +3,8 @@
 Current features:
 - Random camos
     - PAP keeps current camo
+    - Weapon models for the mystery box + PAP reflect the randomized camo
+    - Camos are only randomized once
 - Sets perk limit to 10
 
 Dev Only Features
