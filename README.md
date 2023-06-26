@@ -7,7 +7,7 @@ Current features:
     - Camos are only randomized once
 - Sets perk limit to 10
 
-Dev Only Features
+Dev Only Features:
 - Sets starting points to 500000
 - Sets starting weapon to Drakon
 - Debug print statements
