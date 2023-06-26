@@ -2542,25 +2542,33 @@ function get_pack_a_punch_weapon_options( weapon )
 
 function give_build_kit_weapon( weapon )
 {
-	IPrintLnBold("^1DEBUG: give_build_kit_weapon");
+	IPrintLnBold("^1DEBUG: give_build_kit_weapon"); 
 	upgraded = false;
+	camo = undefined;
 
-	// TODO: Randomize this
-	// Default camo
-	camo = randomIntRange(1, 139);
-	IPrintLnBold("^1DEBUG: random camo - " + camo);
+	// Check if camo is already randomized
+	if (!IsDefined(weapon.camo)) {
+		// Randomize camo (1 - 138)
+		camo = randomIntRange(1, 139);
+		IPrintLnBold("^1DEBUG: random camo - " + camo);
+	}
+	else  {
+		camo = weapon.camo;
+	}
 
 	base_weapon = weapon;
-	if ( is_weapon_upgraded( weapon ) )
-	{
-		// TODO: disable pap camo change?
-		if( isdefined(weapon.pap_camo_to_use) )
-		{
-			camo = weapon.pap_camo_to_use;
-		}
-		else
-		{	
-			camo = get_pack_a_punch_camo_index( undefined );
+	if ( is_weapon_upgraded( weapon ))
+	{	
+		// Prevent camo change if re-paping
+		if (!IsDefined(camo)) {
+			if( isdefined(weapon.pap_camo_to_use) )
+			{
+				camo = weapon.pap_camo_to_use;
+			}
+			else
+			{	
+				camo = get_pack_a_punch_camo_index( undefined );
+			}
 		}
 		upgraded = true;
 		base_weapon = get_base_weapon( weapon );
@@ -2601,8 +2609,8 @@ function give_build_kit_weapon( weapon )
 		acvi = self GetBuildKitAttachmentCosmeticVariantIndexes( weapon, upgraded );
 	}
 
+	weapon.camo = camo; 
 	self GiveWeapon( weapon, weapon_options, acvi );
-
 	return weapon;
 }
 

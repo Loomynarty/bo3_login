@@ -77,7 +77,10 @@ function giveCustomLoadout(takeAllWeapons)
     self GiveWeapon(level.weaponBaseMelee); 
 
     // Switches to the weapon the server gave the player
-    self SwitchToWeapon(weapon); 
+    self SwitchToWeapon(weapon);
+
+    level flag::wait_till( "initial_blackscreen_passed" ); 
+    IPrintLnBold("^1DEBUG: weapon.camo - " + weapon.camo);
 }
 
 function watch_max_ammo() {
