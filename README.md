@@ -1,12 +1,14 @@
 # Black Ops 3 Login Mod
 
 Current features:
-- Sets starting points to 500000
+- Random camos
+    - PAP keeps current camo
 - Sets perk limit to 10
-- Sets starting weapon to Drakon
-- Random camos 
 
-The primary file to pay attention to is `scripts\zm\login.gsc`
+Dev Only Features
+- Sets starting points to 500000
+- Sets starting weapon to Drakon
+- Debug print statements
 
 How to build:
 1. `git clone`
