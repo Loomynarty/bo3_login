@@ -30,28 +30,41 @@
 // MAIN
 //*****************************************************************************
 
+function debug(message) {
+    
+    dev = false;
+    /# dev = true; #/
+
+    if (dev) IPrintLnBold("^1DEBUG: " + message);
+}
+
 function init()
 {
     // Trigger function on player spawn
     callback::on_spawned( &watch_max_ammo );
-    callback::on_spawned( &debug );
+    callback::on_spawned( &load_message );
     callback::on_spawned( &map_check );
-
-    // Initiates the custom loadout
-    level.giveCustomLoadout = &giveCustomLoadout; 
-
-    // Change starting points
-    level.player_starting_points = 500000;
 
     // Change starting perks
     level.perk_purchase_limit = 10;
+
+    // Activate the following only if devblocks are enabled (+set scr_mod_enable_devblock 1)
+    /#
+    // Change starting points
+    level.player_starting_points = 500000;
+
+    // Initiates the custom loadout
+    level.giveCustomLoadout = &giveCustomLoadout;
+    #/ 
 }
 
-function debug()
+
+
+function load_message()
 {
     // Wait until the blackscreen has passed
     level flag::wait_till( "initial_blackscreen_passed" );
-    IPrintLnBold("^1DEBUG: GSC Loading Successful");
+    debug("GSC Loading Successful");
 }
 
 function map_check()
@@ -61,7 +74,7 @@ function map_check()
 
     // Wait until the blackscreen has passed
     level flag::wait_till( "initial_blackscreen_passed" );
-    IPrintLnBold("^1DEBUG: mapname = " + mapname);
+    debug("^2mapname = " + mapname);
 }
 
 function giveCustomLoadout(takeAllWeapons)
@@ -80,16 +93,17 @@ function giveCustomLoadout(takeAllWeapons)
     self SwitchToWeapon(weapon);
 
     level flag::wait_till( "initial_blackscreen_passed" ); 
-    IPrintLnBold("^1DEBUG: weapon.camo - " + weapon.camo);
+    debug("weapon.camo - " + weapon.camo);
 }
 
+// BO4 Max Ammo - fill weapon clip along with ammo reserves 
 function watch_max_ammo() {
     self endon("bled_out");
     self endon("spawned_player");
     self endon("disconnect");
     for(;;) {
         self waittill("zmb_max_ammo");
-        IPrintLnBold("^1DEBUG: BO4 Max Ammo Trigger");
+        debug("BO4 Max Ammo Trigger");
         foreach(weapon in self GetWeaponsList(1)) {
             if (isdefined(weapon.clipsize) && weapon.clipsize > 0) { 
                 self SetWeaponAmmoClip(weapon, weapon.clipsize);

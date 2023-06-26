@@ -27,6 +27,8 @@
 #using scripts\zm\_zm_utility;
 #using scripts\zm\_zm_weap_ballistic_knife;
 
+#using scripts\zm\login;
+
 #insert scripts\zm\_zm_perks.gsh;
 #insert scripts\zm\_zm_utility.gsh;
 #insert scripts\zm\_zm_weapons.gsh;
@@ -2542,15 +2544,15 @@ function get_pack_a_punch_weapon_options( weapon )
 
 function give_build_kit_weapon( weapon )
 {
-	IPrintLnBold("^1DEBUG: give_build_kit_weapon"); 
+	login::debug("^1DEBUG: give_build_kit_weapon"); 
 	upgraded = false;
 	camo = undefined;
 
 	// Check if camo is already randomized
 	if (!IsDefined(weapon.camo)) {
 		// Randomize camo (1 - 138)
-		camo = randomIntRange(1, 139);
-		IPrintLnBold("^1DEBUG: random camo - " + camo);
+		camo = RandomIntRange(1, 139);
+		login::debug("^1DEBUG: random camo - " + camo);
 	}
 	else  {
 		camo = weapon.camo;
