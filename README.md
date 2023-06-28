@@ -4,11 +4,13 @@ Current features:
 - Random camos
     - PAP keeps current camo
 - Sets perk limit to 10
+- BO4 Style Max Ammo
 
 Dev Only Features
+- Debug print statements
 - Sets starting points to 500000
 - Sets starting weapon to Drakon
-- Debug print statements
+- God Mode
 
 How to build:
 1. `git clone`

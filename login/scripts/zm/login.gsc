@@ -48,17 +48,28 @@ function init()
     // Change starting perks
     level.perk_purchase_limit = 10;
 
-    // Activate the following only if devblocks are enabled (+set scr_mod_enable_devblock 1)
     /#
+    // Activate the following only if devblocks are enabled (+set scr_mod_enable_devblock 1)
+    
+    // Enable godmode
+    callback::on_spawned( &god_mode );
+    
     // Change starting points
     level.player_starting_points = 500000;
 
     // Initiates the custom loadout
     level.giveCustomLoadout = &giveCustomLoadout;
     #/ 
+    
 }
 
-
+function god_mode() {
+    debug("Setting godmode");
+    for(i = 0; i < level.players.size; i++)
+	{
+		level.players[i] EnableInvulnerability();
+	}
+}
 
 function load_message()
 {
