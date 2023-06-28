@@ -30,14 +30,6 @@
 // MAIN
 //*****************************************************************************
 
-function debug(message) {
-    
-    dev = false;
-    /# dev = true; #/
-
-    if (dev) IPrintLnBold("^1DEBUG: " + message);
-}
-
 function init()
 {
     // Trigger function on player spawn
@@ -61,6 +53,14 @@ function init()
     level.giveCustomLoadout = &giveCustomLoadout;
     #/ 
     
+}
+
+function debug(message) {
+    
+    dev = false;
+    /# dev = true; #/
+
+    if (dev) IPrintLnBold("^1DEBUG: " + message);
 }
 
 function god_mode() {
@@ -93,7 +93,7 @@ function giveCustomLoadout(takeAllWeapons)
     // Starting weapon
     level.weapon_start = "sniper_fastsemi"; 
 
-    // Built in function in scripts\zm\_zm_utility.gsh
+    // Built in function in scripts\zm\_zm_utility
     // Gives the player a weapon that respects the weapon kits
     weapon = self zm_weapons::give_build_kit_weapon(GetWeapon(level.weapon_start));
 

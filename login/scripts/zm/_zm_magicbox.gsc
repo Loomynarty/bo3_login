@@ -1661,7 +1661,6 @@ function treasure_chest_weapon_spawn( chest, player, respin )
 
 	self.weapon = rand;
 	
-	
 	if ( isdefined( level.func_magicbox_weapon_spawned ) )
 	{
 		self thread [[ level.func_magicbox_weapon_spawned ]]( self.weapon );
