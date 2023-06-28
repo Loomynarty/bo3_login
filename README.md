@@ -26,8 +26,9 @@ How to build:
     - +developer 2: Enables developer mode and in-game console use (Shift + ~)
     - +logfile 2: Logs what the game is doing into the `console_mp.log` file in the mod folder
     - +devmap **replace_with_map**: Loads straight into the specified map. [List of map names](https://t7wiki.com/en/information/list-of-original-map-console-names)
-    - Example: +devmap zm_prototype +developer 2 +logfile 2 
-    - Example 2: +devmap zm_testopener +developer 2 +logfile 2
+    - Example: +devmap zm_prototype +developer 2 +logfile 2 +scr_mod_enable_devblock 1
+    - Example 2: +devmap zm_testopener +developer 2 +logfile 2 +scr_mod_enable_devblock 1
+    - Multiplayer Test: +devmap zm_testopener +set splitscreen 1 +set splitscreen_playerCount 2 +developer 2 +logfile 2 +scr_mod_enable_devblock 1 
 7. Profit!
 
 Mod Template Download: [Link](https://drive.google.com/file/d/15Z4Ho8yZFBvgh6xqv8HutQnJCcey-W7g/view?usp=sharing)

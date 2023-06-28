@@ -642,9 +642,9 @@ function do_melee_weapon_flourish_begin( flourish_weapon )
 	self SwitchToWeapon( weapon );
 
 	// Keep the camo of the flourish weapon
-	if (IsDefined(weapon.camo)) {
-		flourish_weapon.camo = weapon.camo;
-	}
+	// if (IsDefined(weapon.camo)) {
+	// 	flourish_weapon.camo = weapon.camo;
+	// }
 
 	return original_weapon;
 }

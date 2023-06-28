@@ -37,12 +37,14 @@ function init()
     callback::on_spawned( &load_message );
     callback::on_spawned( &map_check );
 
+    callback::on_connect( &init_camo );
+
     // Change starting perks
     level.perk_purchase_limit = 10;
 
     /#
-    // Activate the following only if devblocks are enabled (+set scr_mod_enable_devblock 1)
-    
+    // Activate the following only if devblocks are enabled (+scr_mod_enable_devblock 1)
+
     // Enable godmode
     callback::on_spawned( &god_mode );
     
@@ -55,12 +57,42 @@ function init()
     
 }
 
-function debug(message) {
-    
-    dev = false;
-    /# dev = true; #/
+function init_camo() {
+    debug("^2init_camo for user: " + self.name);
+    self.weapon_camos = array();
+    self notify("custom_loadout");
+}
 
-    if (dev) IPrintLnBold("^1DEBUG: " + message);
+function get_camo_options(weapon, randomize = true) {
+    camo = undefined;
+
+    debug("^2user: " + self.name);
+
+    // Search weapon_camos for weapon
+    for (i = 0; i < self.weapon_camos.size; i++) {
+        debug("found weapon: " + self.weapon_camos[i].weapon);
+        if (self.weapon_camos[i].weapon == weapon.rootweapon.name) {
+            camo = self.weapon_camos[i].camo;
+            debug("found previous camo - " + camo);
+        }
+    }
+
+    if (randomize && !IsDefined(camo)) {
+        camo = RandomIntRange(1, 139);
+        debug("random camo - " + camo);
+
+        // Remember camo
+        data = SpawnStruct();
+        data.weapon = weapon.rootweapon.name;
+        data.camo = camo;
+        array::add(self.weapon_camos, data );
+
+        debug("array size - " + self.weapon_camos.size);
+    }
+
+    options = self GetBuildKitWeaponOptions(weapon, camo);
+
+    return options;
 }
 
 function god_mode() {
@@ -76,6 +108,8 @@ function load_message()
     // Wait until the blackscreen has passed
     level flag::wait_till( "initial_blackscreen_passed" );
     debug("GSC Loading Successful");
+
+    
 }
 
 function map_check()
@@ -90,6 +124,8 @@ function map_check()
 
 function giveCustomLoadout(takeAllWeapons)
 {
+    self waittill("custom_loadout");
+
     // Starting weapon
     level.weapon_start = "sniper_fastsemi"; 
 
@@ -102,9 +138,6 @@ function giveCustomLoadout(takeAllWeapons)
 
     // Switches to the weapon the server gave the player
     self SwitchToWeapon(weapon);
-
-    level flag::wait_till( "initial_blackscreen_passed" ); 
-    debug("weapon.camo - " + weapon.camo);
 }
 
 // BO4 Max Ammo - fill weapon clip along with ammo reserves 
@@ -121,4 +154,11 @@ function watch_max_ammo() {
             }
         }
     }
+}
+
+function debug(message) {
+    dev = false;
+    /# dev = true; #/
+
+    if (dev) self IPrintLnBold("^1DEBUG: " + message);
 }

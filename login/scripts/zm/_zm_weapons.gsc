@@ -2544,19 +2544,9 @@ function get_pack_a_punch_weapon_options( weapon )
 
 function give_build_kit_weapon( weapon )
 {
-	login::debug("^1DEBUG: give_build_kit_weapon"); 
+	login::debug("give_build_kit_weapon"); 
 	upgraded = false;
 	camo = undefined;
-
-	// Check if camo is already randomized
-	if (!IsDefined(weapon.camo)) {
-		// Randomize camo (1 - 138)
-		camo = RandomIntRange(1, 139);
-		login::debug("^1DEBUG: random camo - " + camo);
-	}
-	else  {
-		camo = weapon.camo;
-	}
 
 	base_weapon = weapon;
 	if ( is_weapon_upgraded( weapon ))
@@ -2611,8 +2601,10 @@ function give_build_kit_weapon( weapon )
 		acvi = self GetBuildKitAttachmentCosmeticVariantIndexes( weapon, upgraded );
 	}
 
-	weapon.camo = camo; 
+	// weapon.camo = camo; 
+	weapon_options = self login::get_camo_options(weapon);
 	self GiveWeapon( weapon, weapon_options, acvi );
+
 	return weapon;
 }
 

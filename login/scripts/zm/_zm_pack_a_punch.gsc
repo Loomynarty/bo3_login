@@ -193,15 +193,15 @@ function private third_person_weapon_upgrade( current_weapon, upgrade_weapon, pa
 	upgrade_weapon.pap_camo_to_use = zm_weapons::get_pack_a_punch_camo_index( upgrade_weapon.pap_camo_to_use );
 	
 	// Keep current camo
-	if (IsDefined(current_weapon.camo)) {
-		trigger.current_weapon_options = self GetBuildKitWeaponOptions( trigger.current_weapon, current_weapon.camo );
+	// if (IsDefined(current_weapon.camo)) {
+	// 	trigger.current_weapon_options = self GetBuildKitWeaponOptions( trigger.current_weapon, current_weapon.camo );
 		
-		// Use the previous camo as the pap camo
-		upgrade_weapon.pap_camo_to_use = current_weapon.camo;
+	// 	// Use the previous camo as the pap camo
+	// 	upgrade_weapon.pap_camo_to_use = current_weapon.camo;
 
-		// Set the upgrade weapon camo to the previous camo
-		trigger.upgrade_weapon.camo = current_weapon.camo;
-	}
+	// 	// Set the upgrade weapon camo to the previous camo
+	// 	trigger.upgrade_weapon.camo = current_weapon.camo;
+	// }
 	
 	trigger.upgrade_weapon_options = self GetBuildKitWeaponOptions( trigger.upgrade_weapon, upgrade_weapon.pap_camo_to_use );
 	trigger.upgrade_weapon_acvi = self GetBuildKitAttachmentCosmeticVariantIndexes( trigger.upgrade_weapon, true );
