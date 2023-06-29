@@ -4,7 +4,7 @@ Current features:
 - Random camos
     - PAP keeps current camo
     - Weapon models for the mystery box + PAP reflect the randomized camo
-    - Camos are only randomized once
+    - Camos are only randomized once per player
 - Sets perk limit to 10
 - BO4 Style Max Ammo
 
