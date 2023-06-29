@@ -1682,14 +1682,14 @@ function treasure_chest_weapon_spawn( chest, player, respin )
 	self.model_dw = undefined;
 	self.weapon_model = zm_utility::spawn_buildkit_weapon_model( player, rand, undefined, self.origin + v_float, (-self.angles[0], self.angles[1] + 180, -self.angles[2]));
 	
-	/*
 	// Randomize camo
-	weapon_options = player login::get_camo_options(self.weapon);
+	if (!zm_equipment::is_equipment(self.weapon)) {
+		weapon_options = player login::get_camo_options(self.weapon);
 
-	// Set the model of the mystery box gun to the random camo
-	self.weapon_model SetWeaponOptions( weapon_options );
-	*/
-	
+		// Set the model of the mystery box gun to the random camo
+		self.weapon_model SetWeaponOptions( weapon_options );
+	}
+
 	if ( rand.isDualWield )
 	{
 		dweapon = rand; 

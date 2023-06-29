@@ -6,7 +6,6 @@
 sound,zm_mod
 scriptparsetree,scripts/zm/gametypes/_clientids.gsc
 scriptparsetree,scripts/zm/_zm_magicbox.gsc
-scriptparsetree,scripts/zm/_zm_melee_weapon.gsc
 scriptparsetree,scripts/zm/_zm_pack_a_punch.gsc
 scriptparsetree,scripts/zm/_zm_weapons.gsc
 scriptparsetree,scripts/zm/login.gsc

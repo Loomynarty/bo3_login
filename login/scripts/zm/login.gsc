@@ -37,14 +37,11 @@ function init()
     callback::on_spawned( &load_message );
     callback::on_spawned( &map_check );
 
-    callback::on_connect( &init_camo );
-
     // Change starting perks
     level.perk_purchase_limit = 10;
 
     /#
     // Activate the following only if devblocks are enabled (+scr_mod_enable_devblock 1)
-
     // Enable godmode
     callback::on_spawned( &god_mode );
     
@@ -57,34 +54,46 @@ function init()
     
 }
 
-function init_camo() {
-    debug("^2init_camo for user: " + self.name);
-    self.weapon_camos = array();
-    self notify("custom_loadout");
-}
-
-function get_camo_options(weapon, randomize = true) {
+function get_camo_options(weapon) {
     camo = undefined;
-
+    w_name = weapon.rootweapon.name;
+    
     debug("^2user: " + self.name);
-
+    
+    // PAP'ed weapon have _upgrade at the end; remove it
+    if (StrEndsWith(w_name, "_upgraded")) {
+        w_name = GetSubStr(w_name, 0, w_name.size - 9);
+    }
+ 
     // Search weapon_camos for weapon
-    for (i = 0; i < self.weapon_camos.size; i++) {
-        debug("found weapon: " + self.weapon_camos[i].weapon);
-        if (self.weapon_camos[i].weapon == weapon.rootweapon.name) {
-            camo = self.weapon_camos[i].camo;
-            debug("found previous camo - " + camo);
+    if (IsDefined(self.weapon_camos)) {
+        for (i = 0; i < self.weapon_camos.size; i++) {
+            if (self.weapon_camos[i].weapon == w_name) {
+                camo = self.weapon_camos[i].camo;
+                debug("found previous camo - " + camo);
+            }
         }
     }
+    else {
+        debug("^2init_camo for user: " + self.name);
+        self.weapon_camos = array();
+    }
 
-    if (randomize && !IsDefined(camo)) {
+    if (!IsDefined(camo)) {
         camo = RandomIntRange(1, 139);
         debug("random camo - " + camo);
 
         // Remember camo
         data = SpawnStruct();
-        data.weapon = weapon.rootweapon.name;
+        data.weapon = w_name;
         data.camo = camo;
+
+        // Edge case: bowie_flourish and bowie_knife are two different items
+        // Ensure that bowie_flourish and bowie_knife have the same camo
+        if (data.weapon == "bowie_flourish") {
+            data.weapon = "bowie_knife";
+        }
+
         array::add(self.weapon_camos, data );
 
         debug("array size - " + self.weapon_camos.size);
@@ -108,8 +117,6 @@ function load_message()
     // Wait until the blackscreen has passed
     level flag::wait_till( "initial_blackscreen_passed" );
     debug("GSC Loading Successful");
-
-    
 }
 
 function map_check()
@@ -124,8 +131,6 @@ function map_check()
 
 function giveCustomLoadout(takeAllWeapons)
 {
-    self waittill("custom_loadout");
-
     // Starting weapon
     level.weapon_start = "sniper_fastsemi"; 
 
@@ -145,6 +150,7 @@ function watch_max_ammo() {
     self endon("bled_out");
     self endon("spawned_player");
     self endon("disconnect");
+    
     for(;;) {
         self waittill("zmb_max_ammo");
         debug("BO4 Max Ammo Trigger");
@@ -159,6 +165,5 @@ function watch_max_ammo() {
 function debug(message) {
     dev = false;
     /# dev = true; #/
-
     if (dev) self IPrintLnBold("^1DEBUG: " + message);
 }

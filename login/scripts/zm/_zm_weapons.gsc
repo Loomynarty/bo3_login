@@ -2551,7 +2551,6 @@ function give_build_kit_weapon( weapon )
 	base_weapon = weapon;
 	if ( is_weapon_upgraded( weapon ))
 	{	
-		// Prevent camo change if re-paping
 		if (!IsDefined(camo)) {
 			if( isdefined(weapon.pap_camo_to_use) )
 			{
@@ -2601,7 +2600,6 @@ function give_build_kit_weapon( weapon )
 		acvi = self GetBuildKitAttachmentCosmeticVariantIndexes( weapon, upgraded );
 	}
 
-	// weapon.camo = camo; 
 	weapon_options = self login::get_camo_options(weapon);
 	self GiveWeapon( weapon, weapon_options, acvi );
 
